@@ -1,24 +1,36 @@
-import logo from './logo.svg';
-import './App.css';
+import MainAppBar from "./components/Navigation/MainAppBar";
+import { Routes, Route, Navigate} from "react-router-dom";
+import Catchables from "./containers/catchables/Catchables";
+import Box from "@mui/material/Box";
+import {Container} from "@mui/material";
+
+const Routing = () => {
+  return (
+      <Routes>
+        <Route path="/catchables" element={<Catchables />} />
+        <Route path="/" element={<Navigate to="/catchables" replace={true} />} />
+      </Routes>
+  )
+}
+
+const PageLayout = ({children}) => {
+  return (
+      <div>
+        <MainAppBar />
+        <Container>
+          <Box py={3}>
+            {children}
+          </Box>
+        </Container>
+      </div>
+  )
+}
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <PageLayout>
+      <Routing />
+    </PageLayout>
   );
 }
 
