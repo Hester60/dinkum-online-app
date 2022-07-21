@@ -1,9 +1,9 @@
 import Box from "@mui/material/Box";
 import {Card, CardContent, Chip} from "@mui/material";
 import Typography from "@mui/material/Typography";
-import Thumbail from "../../thumbnail/Thumbnail";
+import Thumbail from "../../Thumbnail/Thumbnail";
 import CatchableCardItemSection from "./CatchableCardItemSection";
-import returnAllOrJoinValues from "../../utils/returnAllOrJoinValues";
+import returnAllOrJoinValues from "../../../utils/returnAllOrJoinValues";
 import {TIMES_FOUND} from "../../../constants/timesFoundConstants";
 import {SEASONS} from "../../../constants/seasonsConstants";
 

@@ -1,7 +1,8 @@
 import {useEffect, useState} from "react";
 import api from '../../api';
 import Box from "@mui/material/Box";
-import CatchableCardsList from "../../components/catchables/CatchableCardsList";
+import CatchableCardsList from "../../components/Catchables/CatchableCardsList";
+import SearchCatchables from "../../components/Catchables/SearchCatchables/SearchCatchables";
 
 export default function Catchables() {
     const [catchables, setCatchables] = useState([]);
@@ -25,9 +26,10 @@ export default function Catchables() {
 
     return (
         <Box>
-            {isLoading ? <div>Loading ...</div> : (
-                <CatchableCardsList catchables={catchables} />
-            )}
+            <SearchCatchables/>
+            <Box mt={3}>
+                <CatchableCardsList catchables={catchables} isLoading={isLoading}/>
+            </Box>
         </Box>
     )
 }
