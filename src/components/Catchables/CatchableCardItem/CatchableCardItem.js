@@ -6,17 +6,19 @@ import CatchableCardItemSection from "./CatchableCardItemSection";
 import returnAllOrJoinValues from "../../../utils/returnAllOrJoinValues";
 import {TIMES_FOUND} from "../../../constants/timesFoundConstants";
 import {SEASONS} from "../../../constants/seasonsConstants";
+import {BUG_HABITATS} from "../../../constants/bugHabitatsConstant";
 
 export default function CatchableCardItem({catchable}) {
 
     const getPreviewSrc = () => `${process.env.REACT_APP_API_URL}${process.env.REACT_APP_API_PREVIEWS_PATH}${catchable.preview}`
+    const getCatchableWhere = () => catchable.type === 'bug' ? returnAllOrJoinValues(catchable.habitats, BUG_HABITATS, 'everywhere') : catchable.habitats.join(', ')
     const catchableTypesColor = {'fish': 'primary', 'critter': 'secondary', 'bugs': 'success'}
 
     return (
         <Box width={275}>
             <Card variant="outlined">
                 <CardContent sx={{textAlign: "center", textTransform: 'capitalize', position: 'relative'}}>
-                    <Box position="absolute"  top={8} left={8}>
+                    <Box position="absolute" top={8} left={8}>
                         <Chip size="small" label={catchable.type} color={catchableTypesColor[catchable.type]}/>
                     </Box>
                     <Box display="flex" justifyContent="center">
@@ -26,13 +28,15 @@ export default function CatchableCardItem({catchable}) {
                     </Box>
                     <Typography fontWeight="bold" align="center">{catchable.name}</Typography>
                     <Box mt={1}>
-                        <CatchableCardItemSection title="Season" text={returnAllOrJoinValues(catchable.seasons, SEASONS)}/>
+                        <CatchableCardItemSection title="Season"
+                                                  text={returnAllOrJoinValues(catchable.seasons, SEASONS)}/>
                     </Box>
                     <Box mt={1}>
-                        <CatchableCardItemSection title="Time found" text={returnAllOrJoinValues(catchable.timesFound, TIMES_FOUND)}/>
+                        <CatchableCardItemSection title="Time found"
+                                                  text={returnAllOrJoinValues(catchable.timesFound, TIMES_FOUND)}/>
                     </Box>
                     <Box mt={1}>
-                        <CatchableCardItemSection title="Where" text={catchable.habitats.join(', ')}/>
+                        <CatchableCardItemSection title="Where" text={getCatchableWhere()}/>
                     </Box>
                     <Box mt={1}>
                         <CatchableCardItemSection title="Sell Price"

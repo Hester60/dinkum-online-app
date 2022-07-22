@@ -1,0 +1,7 @@
+export const BUG_HABITAT_PINE_FORESTS = 'pine forests'
+export const BUG_HABITATS_PLAINS = 'plains'
+export const BUG_HABITATS_TROPICS = 'tropics'
+export const BUG_HABITATS_DESERT = 'desert'
+export const BUG_HABITATS_BUSHLANDS = 'bushlands'
+
+export const BUG_HABITATS = [BUG_HABITAT_PINE_FORESTS, BUG_HABITATS_PLAINS, BUG_HABITATS_TROPICS, BUG_HABITATS_DESERT, BUG_HABITATS_BUSHLANDS]

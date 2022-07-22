@@ -4,11 +4,12 @@
  *
  * @param values
  * @param valuesNeeded
+ * @param allWord
  * @returns {string|*}
  */
-const returnAllOrJoinValues = (values, valuesNeeded) => {
+const returnAllOrJoinValues = (values, valuesNeeded, allWord = 'all') => {
     if (valuesNeeded.every(el => values.includes(el))) {
-        return 'all';
+        return allWord;
     }
 
     return values.join(', ');
