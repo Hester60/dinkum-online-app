@@ -14,7 +14,7 @@ export default function CatchableCardItem({catchable}) {
 
     return (
         <Box width={275}>
-            <Card>
+            <Card variant="outlined">
                 <CardContent sx={{textAlign: "center", textTransform: 'capitalize', position: 'relative'}}>
                     <Box position="absolute"  top={8} left={8}>
                         <Chip size="small" label={catchable.type} color={catchableTypesColor[catchable.type]}/>
