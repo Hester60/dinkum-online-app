@@ -6,6 +6,7 @@ import SearchCatchables from "../../components/Catchables/SearchCatchables/Searc
 import {SEASONS} from "../../constants/seasonsConstants";
 import {TIMES_FOUND} from "../../constants/timesFoundConstants";
 import FilterChip from "../../components/Catchables/SearchCatchables/Filters/FilterChip";
+import {CATCHABLE_TYPES} from "../../constants/catchableTypesConstants";
 
 export default function Catchables() {
     const [allCatchables, setAllCatchables] = useState([]);
@@ -14,6 +15,8 @@ export default function Catchables() {
 
     const [seasonsFiltering, setSeasonsFiltering] = useState(initFilterState(SEASONS));
     const [timesFoundFiltering, setTimesFoundFiltering] = useState(initFilterState(TIMES_FOUND));
+    const [catchableTypesFiltering, setCatchableTypesFiltering] = useState(initFilterState(CATCHABLE_TYPES));
+
     const [resultsNumber, setResultsNumber] = useState(0);
 
     useEffect(() => {
@@ -36,11 +39,9 @@ export default function Catchables() {
 
     useEffect(() => {
         const results = getResult();
-        if (results.length > 0) {
-            setResultsNumber(results.length)
-        }
+        setResultsNumber(results.length)
         setCatchablesResult(results);
-    }, [seasonsFiltering, timesFoundFiltering])
+    }, [seasonsFiltering, timesFoundFiltering, catchableTypesFiltering])
 
     function initFilterState(values) {
         let obj = {};
@@ -57,6 +58,7 @@ export default function Catchables() {
     function getResult() {
         const seasonsFilters = [];
         const timesFoundFilters = [];
+        const catchableTypesFilters = [];
 
         Object.keys(seasonsFiltering).forEach(k => {
             if (seasonsFiltering[k].selected) {
@@ -70,10 +72,17 @@ export default function Catchables() {
             }
         });
 
+        Object.keys(catchableTypesFiltering).forEach(k => {
+            if (catchableTypesFiltering[k].selected) {
+                catchableTypesFilters.push(catchableTypesFiltering[k].name);
+            }
+        });
+
         return [...allCatchables].filter(e => {
             if (
                 (seasonsFilters.length === 0 || (seasonsFilters.length > 0 && e.seasons.some(season => seasonsFilters.includes(season)))) &&
-                (timesFoundFilters.length === 0 || (timesFoundFilters.length > 0 && e.timesFound.some(timeFound => timesFoundFilters.includes(timeFound))))
+                (timesFoundFilters.length === 0 || (timesFoundFilters.length > 0 && e.timesFound.some(timeFound => timesFoundFilters.includes(timeFound)))) &&
+                (catchableTypesFilters.length === 0 || (catchableTypesFilters.length > 0 && catchableTypesFilters.includes(e.type)))
             ) {
                 return true;
             }
@@ -86,6 +95,8 @@ export default function Catchables() {
                 <FilterChip filterName="Seasons" values={seasonsFiltering} setValues={setSeasonsFiltering}/>
                 <FilterChip filterName="Times found" values={timesFoundFiltering}
                             setValues={setTimesFoundFiltering}/>
+                <FilterChip filterName="Types" values={catchableTypesFiltering}
+                            setValues={setCatchableTypesFiltering}/>
             </SearchCatchables>
             <Box mt={3}>
                 <CatchableCardsList catchables={catchablesResult} isLoading={isLoading}/>
