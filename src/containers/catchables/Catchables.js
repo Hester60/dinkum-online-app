@@ -99,7 +99,7 @@ export default function Catchables() {
     return (
         <Box>
             <Card elevation={0}>
-                <Box>
+                <Box pt={1}>
                     <TextField id="outlined-basic" label="Search with name..." variant="outlined" fullWidth
                                value={nameFiltering}
                                type="search"
