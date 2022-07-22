@@ -113,6 +113,9 @@ export default function Catchables() {
                     <FilterChip filterName="Types" values={catchableTypesFiltering} resetState={() => initFilterState(CATCHABLE_TYPES)}
                                 setValues={setCatchableTypesFiltering}/>
                 </Stack>
+                <Box mt={1}>
+                    <Typography fontSize="small">Total results: {resultsNumber}</Typography>
+                </Box>
             </SearchCatchables>
             <Box mt={3}>
                 <CatchableCardsList catchables={catchablesResult} isLoading={isLoading}/>

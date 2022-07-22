@@ -5,7 +5,7 @@ export default function SearchCatchables({resultsNumber, children}) {
     return (
         <Card elevation={0}>
             <Typography color="text.secondary" gutterBottom>
-                Filtering (total results: {resultsNumber})
+                Filtering
             </Typography>
             {children}
         </Card>
