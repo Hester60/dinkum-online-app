@@ -11,7 +11,7 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import Typography from "@mui/material/Typography";
 
-export default function FilterChip({values, setValues, filterName, handleSearch}) {
+export default function FilterChip({values, setValues, filterName}) {
     const [open, setOpen] = useState(false);
     const [title, setTitle] = useState(filterName);
     const [chipColor, setChipColor] = useState("default");
