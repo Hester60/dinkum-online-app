@@ -8,6 +8,8 @@ import FilterChip from "../../components/Catchables/SearchCatchables/Filters/Fil
 import {CATCHABLE_TYPES} from "../../constants/catchableTypesConstants";
 import {Card, Stack, TextField} from "@mui/material";
 import Typography from "@mui/material/Typography";
+import SortMenu from "../../components/SortMenu/SortMenu";
+import {SORT_BEST_SELLING_PRICE, SORT_CATCHABLES, SORT_NAME} from "../../constants/sortConstants";
 
 export default function Catchables() {
     const [allCatchables, setAllCatchables] = useState([]);
@@ -19,6 +21,8 @@ export default function Catchables() {
     const [catchableTypesFiltering, setCatchableTypesFiltering] = useState(initFilterState(CATCHABLE_TYPES));
     const [nameFiltering, setNameFiltering] = useState('');
 
+    const [sort, setSort] = useState(SORT_NAME);
+
     const [resultsNumber, setResultsNumber] = useState(0);
 
     useEffect(() => {
@@ -28,7 +32,7 @@ export default function Catchables() {
             .then(response => {
                 const {data} = response;
                 setAllCatchables(data);
-                setCatchablesResult(data);
+                updateResults(data);
                 setResultsNumber(data.length)
             })
             .catch(err => {
@@ -41,9 +45,23 @@ export default function Catchables() {
 
     useEffect(() => {
         const results = getResult();
+        updateResults(results);
         setResultsNumber(results.length)
+
+    }, [seasonsFiltering, timesFoundFiltering, catchableTypesFiltering, nameFiltering, sort])
+
+    function updateResults(results) {
+        results.sort((a, b) => {
+            switch (sort) {
+                case SORT_NAME:
+                    return (a.name.toLowerCase() > b.name.toLowerCase()) ? 1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0)
+                default:
+                    return  b.sellPrice - a.sellPrice
+            }
+        });
+
         setCatchablesResult(results);
-    }, [seasonsFiltering, timesFoundFiltering, catchableTypesFiltering, nameFiltering])
+    }
 
     function initFilterState(values) {
         let obj = {};
@@ -105,13 +123,18 @@ export default function Catchables() {
                                type="search"
                                onChange={handleNameFilteringChange}/>
                 </Box>
-                <Stack direction="row" spacing={1} mt={2}>
-                    <FilterChip filterName="Seasons" values={seasonsFiltering} setValues={setSeasonsFiltering} resetState={() => initFilterState(SEASONS)}/>
-                    <FilterChip filterName="Times found" values={timesFoundFiltering} resetState={() => initFilterState(TIMES_FOUND)}
-                                setValues={setTimesFoundFiltering}/>
-                    <FilterChip filterName="Types" values={catchableTypesFiltering} resetState={() => initFilterState(CATCHABLE_TYPES)}
-                                setValues={setCatchableTypesFiltering}/>
-                </Stack>
+                <Box display="flex" justifyContent="space-between" alignItems="center">
+                    <Stack direction="row" spacing={1} mt={2}>
+                        <FilterChip filterName="Seasons" values={seasonsFiltering} setValues={setSeasonsFiltering} resetState={() => initFilterState(SEASONS)}/>
+                        <FilterChip filterName="Times found" values={timesFoundFiltering} resetState={() => initFilterState(TIMES_FOUND)}
+                                    setValues={setTimesFoundFiltering}/>
+                        <FilterChip filterName="Types" values={catchableTypesFiltering} resetState={() => initFilterState(CATCHABLE_TYPES)}
+                                    setValues={setCatchableTypesFiltering}/>
+                    </Stack>
+                    <Box mt={1}>
+                        <SortMenu sortValues={SORT_CATCHABLES} setSort={setSort} currentSort={sort} />
+                    </Box>
+                </Box>
                 <Box mt={1}>
                     <Typography fontSize="small">Total results: {resultsNumber}</Typography>
                 </Box>
