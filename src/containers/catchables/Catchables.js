@@ -2,12 +2,11 @@ import {useEffect, useState} from "react";
 import api from '../../api';
 import Box from "@mui/material/Box";
 import CatchableCardsList from "../../components/Catchables/CatchableCardsList";
-import SearchCatchables from "../../components/Catchables/SearchCatchables/SearchCatchables";
 import {SEASONS} from "../../constants/seasonsConstants";
 import {TIMES_FOUND} from "../../constants/timesFoundConstants";
 import FilterChip from "../../components/Catchables/SearchCatchables/Filters/FilterChip";
 import {CATCHABLE_TYPES} from "../../constants/catchableTypesConstants";
-import {Stack, TextField} from "@mui/material";
+import {Card, Stack, TextField} from "@mui/material";
 import Typography from "@mui/material/Typography";
 
 export default function Catchables() {
@@ -99,7 +98,7 @@ export default function Catchables() {
 
     return (
         <Box>
-            <SearchCatchables resultsNumber={resultsNumber}>
+            <Card elevation={0}>
                 <Box>
                     <TextField id="outlined-basic" label="Search with name..." variant="outlined" fullWidth
                                value={nameFiltering}
@@ -116,7 +115,7 @@ export default function Catchables() {
                 <Box mt={1}>
                     <Typography fontSize="small">Total results: {resultsNumber}</Typography>
                 </Box>
-            </SearchCatchables>
+            </Card>
             <Box mt={3}>
                 <CatchableCardsList catchables={catchablesResult} isLoading={isLoading}/>
             </Box>
