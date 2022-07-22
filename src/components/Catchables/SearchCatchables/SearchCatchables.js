@@ -7,9 +7,7 @@ export default function SearchCatchables({resultsNumber, children}) {
             <Typography color="text.secondary" gutterBottom>
                 Filtering (total results: {resultsNumber})
             </Typography>
-            <Stack direction="row" spacing={1} mt={2}>
-                {children}
-            </Stack>
+            {children}
         </Card>
     )
 }

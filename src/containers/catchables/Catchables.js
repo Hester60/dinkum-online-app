@@ -7,6 +7,7 @@ import {SEASONS} from "../../constants/seasonsConstants";
 import {TIMES_FOUND} from "../../constants/timesFoundConstants";
 import FilterChip from "../../components/Catchables/SearchCatchables/Filters/FilterChip";
 import {CATCHABLE_TYPES} from "../../constants/catchableTypesConstants";
+import {Stack, TextField} from "@mui/material";
 
 export default function Catchables() {
     const [allCatchables, setAllCatchables] = useState([]);
@@ -16,6 +17,7 @@ export default function Catchables() {
     const [seasonsFiltering, setSeasonsFiltering] = useState(initFilterState(SEASONS));
     const [timesFoundFiltering, setTimesFoundFiltering] = useState(initFilterState(TIMES_FOUND));
     const [catchableTypesFiltering, setCatchableTypesFiltering] = useState(initFilterState(CATCHABLE_TYPES));
+    const [nameFiltering, setNameFiltering] = useState('');
 
     const [resultsNumber, setResultsNumber] = useState(0);
 
@@ -41,7 +43,7 @@ export default function Catchables() {
         const results = getResult();
         setResultsNumber(results.length)
         setCatchablesResult(results);
-    }, [seasonsFiltering, timesFoundFiltering, catchableTypesFiltering])
+    }, [seasonsFiltering, timesFoundFiltering, catchableTypesFiltering, nameFiltering])
 
     function initFilterState(values) {
         let obj = {};
@@ -53,6 +55,10 @@ export default function Catchables() {
         });
 
         return obj;
+    }
+
+    function handleNameFilteringChange(e) {
+        setNameFiltering(e.target.value.toLowerCase());
     }
 
     function getResult() {
@@ -82,7 +88,8 @@ export default function Catchables() {
             if (
                 (seasonsFilters.length === 0 || (seasonsFilters.length > 0 && e.seasons.some(season => seasonsFilters.includes(season)))) &&
                 (timesFoundFilters.length === 0 || (timesFoundFilters.length > 0 && e.timesFound.some(timeFound => timesFoundFilters.includes(timeFound)))) &&
-                (catchableTypesFilters.length === 0 || (catchableTypesFilters.length > 0 && catchableTypesFilters.includes(e.type)))
+                (catchableTypesFilters.length === 0 || (catchableTypesFilters.length > 0 && catchableTypesFilters.includes(e.type))) &&
+                (nameFiltering.trim() === '' || e.name.toLowerCase().includes(nameFiltering))
             ) {
                 return true;
             }
@@ -92,11 +99,18 @@ export default function Catchables() {
     return (
         <Box>
             <SearchCatchables resultsNumber={resultsNumber}>
-                <FilterChip filterName="Seasons" values={seasonsFiltering} setValues={setSeasonsFiltering}/>
-                <FilterChip filterName="Times found" values={timesFoundFiltering}
-                            setValues={setTimesFoundFiltering}/>
-                <FilterChip filterName="Types" values={catchableTypesFiltering}
-                            setValues={setCatchableTypesFiltering}/>
+                <Box>
+                    <TextField id="outlined-basic" label="Search with name..." variant="outlined" fullWidth
+                               value={nameFiltering}
+                               onChange={handleNameFilteringChange}/>
+                </Box>
+                <Stack direction="row" spacing={1} mt={2}>
+                    <FilterChip filterName="Seasons" values={seasonsFiltering} setValues={setSeasonsFiltering}/>
+                    <FilterChip filterName="Times found" values={timesFoundFiltering}
+                                setValues={setTimesFoundFiltering}/>
+                    <FilterChip filterName="Types" values={catchableTypesFiltering}
+                                setValues={setCatchableTypesFiltering}/>
+                </Stack>
             </SearchCatchables>
             <Box mt={3}>
                 <CatchableCardsList catchables={catchablesResult} isLoading={isLoading}/>
