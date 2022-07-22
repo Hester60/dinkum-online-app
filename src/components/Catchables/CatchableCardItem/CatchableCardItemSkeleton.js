@@ -6,7 +6,7 @@ export default function CatchableCardItemSkeleton() {
 
     return (
         <Box width={275}>
-            <Card>
+            <Card variant="outlined">
                 <CardContent sx={{textAlign: "center", textTransform: 'capitalize', position: 'relative'}}>
                     <Box display="flex" justifyContent="center">
                         <Skeleton variant="rectangular" width={95} height={95}/>
