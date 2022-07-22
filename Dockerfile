@@ -12,4 +12,4 @@ WORKDIR /usr/src/app
 
 COPY package*.json .
 
-CMD npm global add serve && npm install --production && npm run build && serve -s build
+CMD npm -g install serve && npm install --production && npm run build && serve -s build
