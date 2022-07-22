@@ -41,7 +41,7 @@ export default function FilterChip({values, setValues, filterName, resetState}) 
         setValues({...values, [e.target.name]: {...values[e.target.name], selected: e.target.checked}});
     }
 
-    const handleRemove = () => {
+    const handleReset = () => {
         setValues(resetState);
     }
 
@@ -73,7 +73,7 @@ export default function FilterChip({values, setValues, filterName, resetState}) 
                 </FormControl>
                 <Divider sx={{mt: 1}}/>
                 <DialogActions sx={{display: 'flex', justifyContent: 'space-between'}}>
-                    <Button onClick={handleRemove} color="warning">Remove</Button>
+                    <Button onClick={handleReset} color="warning">Reset</Button>
                     <Button onClick={handleClose}>Close</Button>
                 </DialogActions>
             </Dialog>
