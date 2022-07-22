@@ -11,7 +11,7 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import Typography from "@mui/material/Typography";
 
-export default function FilterChip({values, setValues, filterName}) {
+export default function FilterChip({values, setValues, filterName, resetState}) {
     const [open, setOpen] = useState(false);
     const [title, setTitle] = useState(filterName);
     const [chipColor, setChipColor] = useState("default");
@@ -39,6 +39,10 @@ export default function FilterChip({values, setValues, filterName}) {
 
     const handleChange = (e) => {
         setValues({...values, [e.target.name]: {...values[e.target.name], selected: e.target.checked}});
+    }
+
+    const handleRemove = () => {
+        setValues(resetState);
     }
 
     const checkboxes = Object.keys(values).map(k => (
@@ -69,7 +73,7 @@ export default function FilterChip({values, setValues, filterName}) {
                 </FormControl>
                 <Divider sx={{mt: 1}}/>
                 <DialogActions sx={{display: 'flex', justifyContent: 'space-between'}}>
-                    <Button onClick={handleClose} color="warning">Remove</Button>
+                    <Button onClick={handleRemove} color="warning">Remove</Button>
                     <Button onClick={handleClose}>Close</Button>
                 </DialogActions>
             </Dialog>

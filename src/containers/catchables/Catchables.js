@@ -8,6 +8,7 @@ import {TIMES_FOUND} from "../../constants/timesFoundConstants";
 import FilterChip from "../../components/Catchables/SearchCatchables/Filters/FilterChip";
 import {CATCHABLE_TYPES} from "../../constants/catchableTypesConstants";
 import {Stack, TextField} from "@mui/material";
+import Typography from "@mui/material/Typography";
 
 export default function Catchables() {
     const [allCatchables, setAllCatchables] = useState([]);
@@ -102,13 +103,14 @@ export default function Catchables() {
                 <Box>
                     <TextField id="outlined-basic" label="Search with name..." variant="outlined" fullWidth
                                value={nameFiltering}
+                               type="search"
                                onChange={handleNameFilteringChange}/>
                 </Box>
                 <Stack direction="row" spacing={1} mt={2}>
-                    <FilterChip filterName="Seasons" values={seasonsFiltering} setValues={setSeasonsFiltering}/>
-                    <FilterChip filterName="Times found" values={timesFoundFiltering}
+                    <FilterChip filterName="Seasons" values={seasonsFiltering} setValues={setSeasonsFiltering} resetState={() => initFilterState(SEASONS)}/>
+                    <FilterChip filterName="Times found" values={timesFoundFiltering} resetState={() => initFilterState(TIMES_FOUND)}
                                 setValues={setTimesFoundFiltering}/>
-                    <FilterChip filterName="Types" values={catchableTypesFiltering}
+                    <FilterChip filterName="Types" values={catchableTypesFiltering} resetState={() => initFilterState(CATCHABLE_TYPES)}
                                 setValues={setCatchableTypesFiltering}/>
                 </Stack>
             </SearchCatchables>
