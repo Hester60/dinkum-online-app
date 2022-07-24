@@ -9,7 +9,7 @@ import {CATCHABLE_TYPES} from "../../constants/catchableTypesConstants";
 import {Card, Stack, TextField} from "@mui/material";
 import Typography from "@mui/material/Typography";
 import SortMenu from "../../components/SortMenu/SortMenu";
-import {SORT_BEST_SELLING_PRICE, SORT_CATCHABLES, SORT_NAME} from "../../constants/sortConstants";
+import {SORT_CATCHABLES, SORT_NAME} from "../../constants/sortConstants";
 
 export default function Catchables() {
     const [allCatchables, setAllCatchables] = useState([]);
