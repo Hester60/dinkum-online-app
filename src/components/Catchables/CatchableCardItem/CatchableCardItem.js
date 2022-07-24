@@ -9,41 +9,46 @@ import {SEASONS} from "../../../constants/seasonsConstants";
 import {BUG_HABITATS} from "../../../constants/bugHabitatsConstant";
 
 export default function CatchableCardItem({catchable}) {
+  const getPreviewSrc = () => `${process.env.REACT_APP_API_URL}${process.env.REACT_APP_API_PREVIEWS_PATH}${catchable.preview}`
+  const getCatchableWhere = () => catchable.type === 'bug' ? returnAllOrJoinValues(catchable.habitats, BUG_HABITATS, 'everywhere') : catchable.habitats.join(', ')
+  const catchableTypesColor = {'fish': 'primary', 'critter': 'secondary', 'bugs': 'success'}
+  const catchablePrice = (
+    <Box display="flex" alignItems="center" justifyContent="center">
+      <img src={process.env.PUBLIC_URL + '/Inv_Dinks.png'} alt={catchable.name} className="dinks"/>
+      <Typography fontSize="small">{`${new Intl.NumberFormat('en-US').format(catchable.sellPrice)}`}</Typography>
+    </Box>
+  )
 
-    const getPreviewSrc = () => `${process.env.REACT_APP_API_URL}${process.env.REACT_APP_API_PREVIEWS_PATH}${catchable.preview}`
-    const getCatchableWhere = () => catchable.type === 'bug' ? returnAllOrJoinValues(catchable.habitats, BUG_HABITATS, 'everywhere') : catchable.habitats.join(', ')
-    const catchableTypesColor = {'fish': 'primary', 'critter': 'secondary', 'bugs': 'success'}
-
-    return (
-        <Box width={275}>
-            <Card variant="outlined">
-                <CardContent sx={{textAlign: "center", textTransform: 'capitalize', position: 'relative'}}>
-                    <Box position="absolute" top={8} left={8}>
-                        <Chip size="small" label={catchable.type} color={catchableTypesColor[catchable.type]}/>
-                    </Box>
-                    <Box display="flex" justifyContent="center">
-                        <Thumbail
-                            src={getPreviewSrc()}
-                            alt={catchable.name}/>
-                    </Box>
-                    <Typography fontWeight="bold" align="center">{catchable.name}</Typography>
-                    <Box mt={1}>
-                        <CatchableCardItemSection title="Season"
-                                                  text={returnAllOrJoinValues(catchable.seasons, SEASONS)}/>
-                    </Box>
-                    <Box mt={1}>
-                        <CatchableCardItemSection title="Time found"
-                                                  text={returnAllOrJoinValues(catchable.timesFound, TIMES_FOUND)}/>
-                    </Box>
-                    <Box mt={1}>
-                        <CatchableCardItemSection title="Where" text={getCatchableWhere()}/>
-                    </Box>
-                    <Box mt={1}>
-                        <CatchableCardItemSection title="Sell Price"
-                                                  text={`Ð ${new Intl.NumberFormat('en-US').format(catchable.sellPrice)}`}/>
-                    </Box>
-                </CardContent>
-            </Card>
-        </Box>
-    )
+  return (
+    <Box width={275}>
+      <Card variant="outlined">
+        <CardContent sx={{textAlign: "center", textTransform: 'capitalize', position: 'relative'}}>
+          <Box position="absolute" top={8} left={8}>
+            <Chip size="small" label={catchable.type} color={catchableTypesColor[catchable.type]}/>
+          </Box>
+          <Box display="flex" justifyContent="center">
+            <Thumbail
+              src={getPreviewSrc()}
+              alt={catchable.name}/>
+          </Box>
+          <Typography fontWeight="bold" align="center">{catchable.name}</Typography>
+          <Box mt={1}>
+            <CatchableCardItemSection title="Season"
+                                      text={<Typography fontSize="small">{returnAllOrJoinValues(catchable.seasons, SEASONS)}</Typography>}/>
+          </Box>
+          <Box mt={1}>
+            <CatchableCardItemSection title="Time found"
+                                      text={<Typography fontSize="small">{returnAllOrJoinValues(catchable.timesFound, TIMES_FOUND)}</Typography>}/>
+          </Box>
+          <Box mt={1}>
+            <CatchableCardItemSection title="Where" text={<Typography fontSize="small">{getCatchableWhere()}</Typography>}/>
+          </Box>
+          <Box mt={1}>
+            <CatchableCardItemSection title="Sell Price"
+                                      text={catchablePrice}/>
+          </Box>
+        </CardContent>
+      </Card>
+    </Box>
+  )
 }
