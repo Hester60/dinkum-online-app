@@ -174,13 +174,13 @@ export default function Catchables() {
                 </Box>
                 <div className="FiltersSort">
                     <Box display="flex" gap={1} mt={2} flexWrap="wrap">
+                        <FilterChip filterName="Types" values={catchableTypesFiltering} resetState={() => initFilterState(CATCHABLE_TYPES)}
+                                    setValues={handleTypeChange}/>
                         <FilterChip filterName="Seasons" values={seasonsFiltering} setValues={setSeasonsFiltering} resetState={() => initFilterState(SEASONS)}/>
                         <FilterChip filterName="Times found" values={timesFoundFiltering} resetState={() => initFilterState(TIMES_FOUND)}
                                     setValues={setTimesFoundFiltering}/>
                         <FilterChip filterName="Habitats" values={habitatsFiltering} resetState={() => initFilterState(HABITATS_RESET_STATE)}
                                     setValues={setHabitatsFiltering}/>
-                        <FilterChip filterName="Types" values={catchableTypesFiltering} resetState={() => initFilterState(CATCHABLE_TYPES)}
-                                    setValues={handleTypeChange}/>
                     </Box>
                     <Box mt={1}>
                         <SortMenu sortValues={SORT_CATCHABLES} setSort={setSort} currentSort={sort} />
