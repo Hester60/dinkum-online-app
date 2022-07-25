@@ -10,6 +10,7 @@ import {Card, Stack, TextField} from "@mui/material";
 import Typography from "@mui/material/Typography";
 import SortMenu from "../../components/SortMenu/SortMenu";
 import {SORT_CATCHABLES, SORT_NAME} from "../../constants/sortConstants";
+import './Catchable.css';
 
 export default function Catchables() {
     const [allCatchables, setAllCatchables] = useState([]);
@@ -123,7 +124,7 @@ export default function Catchables() {
                                type="search"
                                onChange={handleNameFilteringChange}/>
                 </Box>
-                <Box display="flex" justifyContent="space-between" alignItems="center">
+                <div className="FiltersSort">
                     <Stack direction="row" spacing={1} mt={2}>
                         <FilterChip filterName="Seasons" values={seasonsFiltering} setValues={setSeasonsFiltering} resetState={() => initFilterState(SEASONS)}/>
                         <FilterChip filterName="Times found" values={timesFoundFiltering} resetState={() => initFilterState(TIMES_FOUND)}
@@ -134,7 +135,7 @@ export default function Catchables() {
                     <Box mt={1}>
                         <SortMenu sortValues={SORT_CATCHABLES} setSort={setSort} currentSort={sort} />
                     </Box>
-                </Box>
+                </div>
                 <Box mt={1}>
                     <Typography fontSize="small">Total results: {resultsNumber}</Typography>
                 </Box>
