@@ -57,8 +57,8 @@ export default function FilterChip({values, setValues, filterName, resetState}) 
     return (
         <>
             <Box>
-                <Chip variant="outlined" color={chipColor} label={
-                    <Typography sx={{textTransform: 'capitalize'}}>
+                <Chip variant="outlined" color={chipColor} sx={{maxWidth: 300}} label={
+                    <Typography sx={{textTransform: 'capitalize', textOverflow: "ellipsis", overflow: "hidden"}}>
                         {title}
                     </Typography>
                 }
