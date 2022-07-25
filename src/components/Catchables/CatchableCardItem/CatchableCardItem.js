@@ -6,12 +6,11 @@ import CatchableCardItemSection from "./CatchableCardItemSection";
 import returnAllOrJoinValues from "../../../utils/returnAllOrJoinValues";
 import {TIMES_FOUND} from "../../../constants/timesFoundConstants";
 import {SEASONS} from "../../../constants/seasonsConstants";
-import {BUG_HABITATS} from "../../../constants/bugHabitatsConstant";
 
 export default function CatchableCardItem({catchable}) {
   const getPreviewSrc = () => `${process.env.REACT_APP_API_URL}${process.env.REACT_APP_API_PREVIEWS_PATH}${catchable.preview}`
-  const getCatchableWhere = () => catchable.type === 'bug' ? returnAllOrJoinValues(catchable.habitats, BUG_HABITATS, 'everywhere') : catchable.habitats.join(', ')
   const catchableTypesColor = {'fish': 'primary', 'critter': 'secondary', 'bugs': 'success'}
+
   const catchablePrice = (
     <Box display="flex" alignItems="center" justifyContent="center">
       <img src={process.env.PUBLIC_URL + '/Inv_Dinks.png'} alt={catchable.name} className="dinks"/>
@@ -38,10 +37,10 @@ export default function CatchableCardItem({catchable}) {
           </Box>
           <Box mt={1}>
             <CatchableCardItemSection title="Time found"
-                                      text={<Typography fontSize="small">{returnAllOrJoinValues(catchable.timesFound, TIMES_FOUND)}</Typography>}/>
+                                      text={<Typography fontSize="small">{returnAllOrJoinValues(catchable.timesFound, TIMES_FOUND, 'All day')}</Typography>}/>
           </Box>
           <Box mt={1}>
-            <CatchableCardItemSection title="Where" text={<Typography fontSize="small">{getCatchableWhere()}</Typography>}/>
+            <CatchableCardItemSection title="Where" text={<Typography fontSize="small">{catchable.habitats.join(', ')}</Typography>}/>
           </Box>
           <Box mt={1}>
             <CatchableCardItemSection title="Sell Price"
