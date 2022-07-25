@@ -4,12 +4,9 @@ services:
     build:
       context: .
       target: ${NODE_ENV}
-      args:
-        SSL_VOLUME: ${SSL_VOLUME}
     env_file:
       - .env
     ports:
       - "${PORT}:${PORT}"
     volumes:
       - .:/usr/src/app/
-      - ${SSL_VOLUME}:/cert
