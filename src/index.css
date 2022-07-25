@@ -11,3 +11,7 @@ body {
   width: 23px;
   height: auto
 }
+
+.styled-link {
+  color: white;
+}
