@@ -4,7 +4,7 @@ WORKDIR /usr/src/app
 
 COPY package*.json ./
 
-CMD npm install && export HTTPS=true&&SSL_CRT_FILE=./cert/cert.pem&&SSL_KEY_FILE=./cert/privkey.pem && npm run start
+CMD npm install && npm run start
 
 FROM node:16-alpine as prod
 
