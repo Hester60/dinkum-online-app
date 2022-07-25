@@ -141,6 +141,7 @@ export default function Catchables() {
         const selectedTypes = Object.keys(filters).filter(k => filters[k].selected);
         const habitatsFilteringClone = {...habitatsFiltering};
         const resetHabitatsState = initFilterState(HABITATS_RESET_STATE);
+
         if (!selectedTypes.length) {
             setHabitatsFiltering({...resetHabitatsState, ...habitatsFilteringClone})
         } else {
