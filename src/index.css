@@ -15,3 +15,7 @@ body {
 .styled-link {
   color: white;
 }
+
+.navbar-logo {
+  max-width: 150px;
+}
