@@ -6,3 +6,16 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+.dinks {
+  width: 23px;
+  height: auto
+}
+
+.styled-link {
+  color: white;
+}
+
+.navbar-logo {
+  max-width: 150px;
+}
