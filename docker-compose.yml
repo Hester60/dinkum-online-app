@@ -4,6 +4,8 @@ services:
     build:
       context: .
       target: ${NODE_ENV}
+      args:
+        SSL_VOLUME: ${SSL_VOLUME}
     env_file:
       - .env
     ports:

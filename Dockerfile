@@ -1,5 +1,7 @@
 FROM node:16-alpine as dev
 
+ARG SSL_VOLUME
+
 WORKDIR /usr/src/app
 
 COPY package*.json ./
@@ -7,6 +9,8 @@ COPY package*.json ./
 CMD npm install && export HTTPS=true&&SSL_CRT_FILE=.${SSL_VOLUME}/cert.pem&&SSL_KEY_FILE=${SSL_VOLUME}/privkey.pem && npm run start
 
 FROM node:16-alpine as prod
+
+ARG SSL_VOLUME
 
 WORKDIR /usr/src/app
 
