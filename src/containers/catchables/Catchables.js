@@ -121,10 +121,10 @@ export default function Catchables() {
 
         return [...allCatchables].filter(e => {
             if (
-                (seasonsFilters.length === 0 || (seasonsFilters.length > 0 && e.seasons.some(season => seasonsFilters.includes(season)))) &&
-                (timesFoundFilters.length === 0 || (timesFoundFilters.length > 0 && e.timesFound.some(timeFound => timesFoundFilters.includes(timeFound)))) &&
-                (catchableTypesFilters.length === 0 || (catchableTypesFilters.length > 0 && catchableTypesFilters.includes(e.type))) &&
-                (habitatsFilters.length === 0 || e.habitats.includes(HABITAT_EVERYWHERE) || (habitatsFilters.length > 0 && e.habitats.some(habitat => habitatsFilters.includes(habitat)))) &&
+                (!seasonsFilters.length || (seasonsFilters.length > 0 && e.seasons.some(season => seasonsFilters.includes(season)))) &&
+                (!timesFoundFilters.length || (timesFoundFilters.length > 0 && e.timesFound.some(timeFound => timesFoundFilters.includes(timeFound)))) &&
+                (!catchableTypesFilters.length || (catchableTypesFilters.length > 0 && catchableTypesFilters.includes(e.type))) &&
+                (!habitatsFilters.length || e.habitats.includes(HABITAT_EVERYWHERE) || (habitatsFilters.length > 0 && e.habitats.some(habitat => habitatsFilters.includes(habitat)))) &&
                 (nameFiltering.trim() === '' || e.name.toLowerCase().includes(nameFiltering))
             ) {
                 return true;
